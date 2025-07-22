@@ -9,18 +9,29 @@ class Solution(object):
         #     np=fa(ind-1)     
         #     return max(p,np) 
         # return fa(len(nums)-1)  
-        dp={}
+        # dp={}
+        # dp[0]=nums[0]
+        # def fa(ind):
+        #     if ind<0:
+        #         return 0
+        #     if ind in dp:
+        #         return dp[ind]
+        #     p=nums[ind]+fa(ind-2)
+        #     np=fa(ind-1) 
+        #     dp[ind]=max(p,np)    
+        #     return dp[ind]
+        # return fa(len(nums)-1)
+        if len(nums)<=2:
+            return max(nums)
+        dp=[0 for _ in range(len(nums))]
         dp[0]=nums[0]
-        def fa(ind):
-            if ind<0:
-                return 0
-            if ind in dp:
-                return dp[ind]
-            p=nums[ind]+fa(ind-2)
-            np=fa(ind-1) 
-            dp[ind]=max(p,np)    
-            return dp[ind]
-        return fa(len(nums)-1)
+        dp[1]=max(nums[0],nums[1])
+        print(dp)
+        for i in range(2,len(nums)):
+            dp[i]=nums[i]+max(dp[0:i-1])
+        print(dp)
+        return max(dp[-1],dp[-2])
+
             
 
 
