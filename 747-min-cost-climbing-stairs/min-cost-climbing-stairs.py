@@ -4,16 +4,14 @@ class Solution(object):
         :type cost: List[int]
         :rtype: int
         """
-        dp={}
-
-        def fa(ind):
-            if ind<2:
-                return cost[ind]
-            if ind in dp:
-                return dp[ind]
-            dp[ind]=cost[ind]+min(fa(ind-1),fa(ind-2))
-            return dp[ind]
         cost.append(0)
-        return fa(len(cost)-1)
+        dp=[-1 for _ in range(len(cost))]
+        dp[0]=cost[0]
+        dp[1]=cost[1]
+        for ind in range(2,len(cost)):
+            dp[ind]=cost[ind]+min(dp[ind-1],dp[ind-2])
+        print(cost)
+        print(dp)
+        return dp[len(cost)-1]
             
         
