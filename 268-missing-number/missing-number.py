@@ -1,9 +1,15 @@
 class Solution(object):
     def missingNumber(self, nums):
-        v=[ 0 for _ in range(len(nums)+1)]
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n=len(nums)
+        ans=n*(n+1)//2
+        # print(ans)
+        s=0
         for i in nums:
-            v[i]=1
-        # print(v)
-        for i in range(len(v)):
-            if v[i]==0:
-                return i
+            s+=i
+        # print(s)
+        return ans-s
+        
