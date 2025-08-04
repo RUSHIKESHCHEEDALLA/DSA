@@ -1,29 +1,23 @@
 class Solution(object):
     def getRow(self, rowIndex):
-        ans=[]
-        def fa(n,a):
-            if n==1:
-                a.append([1])
-            elif n==2:
-                fa(n-1,a)
-                a.append([1,1]) 
-            else:
-                fa(n-1,a)
-                if len(a)>0:
-                    s=a[-1]
-                    ans=[1]
-                    for i in range(1,len(s)):
-                        val=s[i-1]+s[i]
-                        ans.append(val)
+        if rowIndex==0:
+            return [1]
+        elif rowIndex==1:
+            return [1,1]
+        else:
+            dp=[-1 for _ in range(rowIndex+1)]
+            dp[0]=[1]
+            dp[1]=[1,1]
+            for i in range(2,rowIndex+1):
+                l=dp[i-1]
+                ans=[1]
+                if l!=-1:
+                    for  j in range(1,len(l)):
+                        ans.append(l[j-1]+l[j])
                     ans.append(1)
-                    a.append(ans) 
-            return a
-        ans=fa(rowIndex+1,[])
-        return ans[-1]
-       
+                    dp[i]=ans
+            return dp[rowIndex]
+                    
+                
 
-
-
-
-
-        
+            
